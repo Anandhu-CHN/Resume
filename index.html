@@ -54,18 +54,15 @@ h1 {
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover transition */
 
     /* Animation properties for entrance */
-    animation-name: myAnimation;
-    animation-duration: 1s;
-    animation-timing-function: ease-out; /* Smoother start/end */
-    animation-delay: 0s;
-    animation-iteration-count: 1;
-    animation-direction: normal;
-    animation-fill-mode: forwards;
-    opacity: 0; /* Start hidden for animation */
-    transform: translateY(20px); /* Start slightly below for animation */
-    /* animation-timeline and animation-range are still experimental and might not be widely supported */
-    /* If you want scroll-triggered animation, consider using Intersection Observer with JS */
-}
+    aanimation-name: myAnimation;
+animation-duration: 1s;
+animation-timing-function: ease;
+animation-delay: 0s;
+animation-iteration-count:1;
+animation-direction: normal;
+animation-fill-mode: forwards;
+animation-timeline: view();
+animation-range:entry 0% cover 50%;}
 
 /* Specific Height Adjustments for sections */
 .sections {
@@ -92,11 +89,12 @@ h1 {
 @keyframes myAnimation {
   0% {
     opacity: 0;
-    transform: translateY(30px) scale(0.95); /* Start slightly scaled down and below */
+    transform: scale(0.05); /* Start slightly scaled down and below */
+ 
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1); /* End at normal position and scale */
+    transform: scale(1); /* End at normal position and scale */
   }
 }
 
