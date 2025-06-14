@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anandhu A - Resume</title>
+
+
+<style>
+/* Basic Reset and Body Styles */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif; /* Professional font */
+    background: linear-gradient(to right, #ff0062, #ff0085); /* Your gradient, removed 'fixed' for better scroll behavior */
+    color: #ffe8e8; /* Light text color */
+    display: flex; /* Use flexbox for body to center h1 and content */
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    min-height: 100vh; /* Ensure full viewport height */
+    padding: 20px; /* Overall padding */
+    box-sizing: border-box; /* Include padding in element's total width */
+}
+
+h1 {
+    color: white;
+    margin-top: 20px; /* Adjusted margin */
+    margin-bottom: 30px; /* Space below main title */
+    text-align: center; /* Center the main title */
+    font-size: 2.8em; /* Slightly larger main title */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+/* Content Container - Using CSS Grid */
+#content {
+    width: 100%;
+    max-width: 1200px; /* Max width for large screens */
+    margin: 0 auto; /* Center the content div */
+    display: grid; /* Use CSS Grid for flexible layout */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid: at least 300px wide, fills available space */
+    gap: 25px; /* Spacing between grid items */
+    padding: 0 15px; /* Padding inside the content area */
+}
+
+/* Common Section Styles */
+.sections, .sections1, .sections5 {
+    background: linear-gradient(to right, #f70000, #f2009d); /* Your gradient, removed 'fixed' */
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Softer border */
+    padding: 20px; /* Increased padding inside sections */
+    box-sizing: border-box; /* Include padding in width/height */
+    text-align: center; /* Center text within sections */
+    color: #ffe8e8; /* Inherit light text color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover transition */
+
+    /* Animation properties for entrance */
+    animation-name: myAnimation;
+    animation-duration: 1s;
+    animation-timing-function: ease-out; /* Smoother start/end */
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+    opacity: 0; /* Start hidden for animation */
+    transform: translateY(20px); /* Start slightly below for animation */
+    /* animation-timeline and animation-range are still experimental and might not be widely supported */
+    /* If you want scroll-triggered animation, consider using Intersection Observer with JS */
+}
+
+/* Specific Height Adjustments for sections */
+.sections {
+    min-height: 400px; /* Use min-height for flexibility */
+}
+
+.sections1 {
+    min-height: 300px;
+}
+
+.sections5 {
+    min-height: 400px;
+}
+
+
+/* Section Hover Effect */
+.sections:hover, .sections1:hover, .sections5:hover {
+    transform: translateY(-8px) scale(1.01); /* Lift and slightly enlarge */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover */
+}
+
+
+/* Animation Keyframes for sections */
+@keyframes myAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95); /* Start slightly scaled down and below */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1); /* End at normal position and scale */
+  }
+}
+
+/* Headings within sections */
+.sections h1, .sections1 h1, .sections5 h1 {
+    color: white; /* Ensure heading color within sections is white */
+    margin-top: 0; /* Remove default top margin */
+    margin-bottom: 15px; /* Space below section headings */
+    font-size: 1.5em; /* Smaller headings for sections */
+}
+
+/* List styles within sections */
+.sections ul, .sections1 ul, .sections5 ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+.sections li, .sections1 li, .sections5 li {
+    margin-bottom: 8px; /* Spacing between list items */
+}
+
+/* Button Styles */
+button {
+    width: 180px; /* Slightly wider button */
+    height: 50px; /* Taller button */
+    cursor: pointer;
+    border: none;
+    border-radius: 25px; /* More rounded pill shape */
+    background: linear-gradient(to right, #00ff90, #00ffff); /* Your gradient */
+    color: #333; /* Darker text for contrast on bright button */
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 15px; /* Space above the button */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Initial subtle shadow */
+    transition: all 0.3s ease; /* Smooth transition for hover and animation */
+
+    /* Pulsing animation */
+    animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1); /* Smoother pulse */
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.7); /* Start with transparent teal shadow */
+    }
+    70% {
+        transform: scale(1.05); /* Slightly larger */
+        box-shadow: 0 0 0 20px rgba(0, 255, 255, 0); /* Expand and fade out teal shadow */
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(0, 255, 255, 0);
+    }
+}
+
+button:hover {
+    opacity: 0.9; /* Slight opacity change on hover */
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+/* Link Styles for buttons in projects */
+a {
+    text-decoration: none; /* Remove underline from links */
+    display: inline-block; /* Make anchor tag behave like a block for button centering */
+    margin-bottom: 10px; /* Space between buttons */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 992px) {
+    #content {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjust min-width for medium screens */
+        gap: 20px;
+    }
+    h1 {
+        font-size: 2.2em;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+        margin-bottom: 25px;
+    }
+    #content {
+        grid-template-columns: 1fr; /* Stack all sections on small screens */
+        padding: 0 10px;
+        gap: 15px;
+    }
+    .sections, .sections1, .sections5 {
+        min-height: auto; /* Let content define height on small screens */
+        padding: 15px;
+    }
+    button {
+        width: 100%; /* Full width buttons on small screens */
+        margin: 15px 0 0; /* Center buttons horizontally */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    body {
+        padding: 10px;
+    }
+}
+
+</style>
+
+</head>
+<body>
+
+<h1> Anandhu A</h1>
+<div id="content">
+<div class="sections" >
+
+<h1>About Me</h1>
+
+
+As a <b>2nd-year B.Tech Electrical and Electronics Engineering student</b> at the College of Engineering Chengannur, I'm eager to explore the diverse fields of electrical engineering, electronics, and programming. I'm particularly interested in <b>
+web design and networking</b>, and I'm keen to connect with individuals who share similar passions.
+
+In addition to my B.Tech studies, I've successfully completed a <b>Diploma in Computer Application (DCA)</b>, an  achievement recognized by the Government of Kerala and approved by the BSS Information Technology Mission. My goal is to become a proficient and successful Electrical Engineer.
+
+
+</div>
+<div class="sections1" >
+<h1>
+Skills</h1>
+Passionate about:
+<ul>
+
+<li>Electrical field</li> <li>Electronics scenario</li><li>Programming (Python,C)</li>
+
+<li> Web Designing (HTML,CSS,JS)</li>
+ <li>Networking</li>
+<li>Time Management</li>
+<li>Leadership</li>
+<li>MS OFFICE & Photoshop</li>
+</ul>
+
+</div>
+<div class="sections" >
+<h1>
+Education</h1>
+<ul>
+<li>
+2nd Year B-Tech in Electrical and Electronics Engineering - College of Engineering Chengannur
+</li>
+<li>
+Diploma in Computer Application (DCA) - Approved by BSS Information Technology Mission, Recognized by Govt. of Kerala.
+</li>
+</ul>
+
+</div>
+<div class="sections5" >
+
+<h1>
+Projects</h1>
+
+ Offline HTML Compiler:
+
+<br>
+This Offline HTML Compiler is made using the help of AI, in writing almost 80% of code, but idea is mine.
+<br>
+<a href="https://anandhu-chn.github.io/Offline-HTML-Compiler-/">
+<button> Offline HTML Compiler</button>
+</a>
+<br>
+
+
+
+<br>
+
+Online Calculator:
+<br>
+My first HTML + CSS + JS project that I have made.
+<br>
+
+<a href="https://anandhu-chn.github.io/OnlineCalculator/">
+<button> Online Calculator</button>
+</a>
+<br>
+
+
+
+<br>
+
+<a href="https://github.com/Anandhu-CHN">
+<button> My GitHub Profile </button>
+</a>
+<br>
+
+
+</div>
+<div class="sections" >
+<h1>Contact</h1>
+<br>
+Feel free to connect!
+
+Email: your.email@example.com
+<br><br>
+LinkedIn: https://www.linkedin.com/in/anandhu27122005
+
+</div>
+</div>
+
+
+</body>
+</html>
