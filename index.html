@@ -269,13 +269,16 @@ border: none;
 justify-content: flex-end;
 }
 img{
-    position: absolute;
+    
 width:80px;
 height:80px;
-border-radius: 40px;
-animation:spin-child-anticlockwise 1s ease 0.3s infinite;
-    
+border-radius: 40px;   
 }
+
+ #absolute-child{
+position: absolute;
+ animation:spin-child-anticlockwise 1s ease 0.3s infinite;
+ }
   @keyframes spin-child-anticlockwise{
 from{
 transform:rotate(0deg);
@@ -328,7 +331,9 @@ height:150px;
 <div id="rectangle"> </div>
 <div id="circle"> 
 <a href="https://www.linkedin.com/in/anandhu27122005?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
-<img src="profile_icon.jpg" alt="Profile Picture"/>
+<div id="absolute-child">
+    <img src="profile_icon.jpg" alt="Profile Picture"/>
+</div>
 </a>
 </div>
 </div>
