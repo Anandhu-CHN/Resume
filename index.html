@@ -225,9 +225,6 @@
 
 
 #circle{
-    display: flex;
-justify-content: center;
-align-items: center;
 position: relative;
 width:84px;
 height:84px;  
@@ -277,8 +274,8 @@ border-radius: 40px;
  #absolute-child{
 position: absolute;
  animation:spin-child-anticlockwise 1s ease 0.3s infinite;
- width:78px;
- height:78px;}
+ transform: translate(3px,3px);
+ }
   @keyframes spin-child-anticlockwise{
 from{
 transform:rotate(0deg);
