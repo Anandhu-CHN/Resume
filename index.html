@@ -228,7 +228,7 @@ position: absolute;
 }
 
 #circle{
-
+position: relative;
 width:85px;
 height:85px;  
 background: linear-gradient(#00ff00,#00ffff);
@@ -238,11 +238,11 @@ box-shadow:0px 2px 15px grey ;
 display: flex;
 justify-content: center;
 align-items: center;
-animation:spin 1s ease 0.3s infinite;
+animation:spin-parent 1s ease 0.3s infinite;
 
 }
 
-@keyframes spin{
+@keyframes spin-parent{
 from{
 transform:rotate(0deg);
 }
@@ -269,13 +269,21 @@ border: none;
 justify-content: flex-end;
 }
 img{
-    
+    position: absolute;
 width:80px;
-
 height:80px;
 border-radius: 40px;
-
+animation:spin-child-anticlockwise 1s ease 0.3s infinite;
+    
 }
+  @keyframes spin-child-anticlockwise{
+from{
+transform:rotate(0deg);
+}
+    to{
+transform:rotate(-360deg);
+    }
+        }
         #circle:active{
 background: radial-gradient(#ff0381 40px,#00db96 10px);
         }
