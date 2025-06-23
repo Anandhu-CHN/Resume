@@ -213,6 +213,71 @@
                 padding: 10px;
             }
         }
+
+        /* Profile icon feature below........*/
+/* 
+      ########################
+        ###################
+        ####################
+        */
+
+        
+#rectangle,#circle{
+position: absolute;
+
+}
+
+#circle{
+margin-left: 100px;
+width:200px;
+height:200px;  
+background: radial-gradient(#00ff00 90px,#00ffff 10px);
+border:1px solid grey;
+border-radius: 100px;
+box-shadow:0px 2px 15px grey ;
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+#rectangle{
+width:17px;
+height:110px;
+background-color: #00ffff;
+border:1px solid grey;
+border-radius: 5px;
+box-shadow:0 1px 15px grey ;
+}
+
+
+#lnbox {
+
+
+  background-color: transparent;
+  position: relative; /* <--- Add this! */
+  width: 100%; /* Give it a defined size so its children have something to position against */
+  height: 350px; /* Give it a defined size */
+  border: 1px solid black; /* For visualization */
+  overflow: hidden; /* Important if children might overflow it visually */
+display:flex;
+border: none;
+justify-content: flex-end;
+}
+img{
+width:180px;
+height:180px;
+border-radius: 90px;
+
+}
+#wholeln-image{
+top:300px;
+position: fixed;
+background-color: transparent;
+width:100%;
+height:350px;
+}
+
+        
     </style>
 
 </head>
@@ -238,6 +303,20 @@
                 <li>MS OFFICE & Photoshop</li>
             </ul>
         </div>
+
+<div id="wholeln-image">
+<div id="lnbox"> 
+<div id="rectangle"> </div>
+<div id="circle"> 
+<img src="Profile_icon.jpg" alt="Profile Picture"/>
+</div>
+</div>
+</div>
+        
+
+
+
+        
         <div class="sections">
             <h1>Education</h1>
             <ul>
