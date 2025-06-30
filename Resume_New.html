@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anandhu A - Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Modernized Reset and Body Styles */
+        :root {
+            --primary-gradient-start: #91fffa;
+            --primary-gradient-end: #00ffb3;
+            --secondary-gradient-start: #080075;
+            --secondary-gradient-end: #0012b8;
+            --text-light: #e0f2f7; /* Lighter text for dark backgrounds */
+            --text-dark: #2c3e50;
+            --accent-gradient-start: #00ff90;
+            --accent-gradient-end: #00ffff;
+            --shadow-light: rgba(0, 0, 0, 0.2);
+            --shadow-deep: rgba(0, 0, 0, 0.3);
+            --border-color: rgba(255, 255, 255, 0.15); /* Softer border */
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', Arial, sans-serif; /* Professional font */
+            background: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end)) fixed;
+            color: var(--text-light); /* Light text color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            line-height: 1.6; /* Improved readability */
+            font-size: 1rem; /* Base font size */
+        }
+
+        h1 {
+            color: white;
+            margin-top: 20px;
+            margin-bottom: 40px; /* More space below main title */
+            text-align: center;
+            font-size: 3.2rem; /* Larger main title */
+            font-family: 'Montserrat', sans-serif; /* Modern heading font */
+            text-shadow: 3px 3px 6px var(--shadow-deep); /* More pronounced shadow */
+            letter-spacing: 1px;
+        }
+
+        /* Content Container - Using CSS Grid */
+        #content {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; /* Increased spacing between grid items */
+            padding: 0 15px;
+            box-sizing: border-box;
+        }
+
+        /* Common Section Styles */
+        .sections, .sections1, .sections5 {
+            background: linear-gradient(to bottom right, var(--secondary-gradient-start), var(--secondary-gradient-end)); /* More dynamic gradient */
+            border-radius: 15px; /* More rounded corners */
+            border: 1px solid var(--border-color);
+            padding: 25px; /* Increased padding inside sections */
+            box-sizing: border-box;
+            text-align: center;
+            color: var(--text-light);
+            box-shadow: 0 6px 12px var(--shadow-light); /* Deeper initial shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            animation: fadeInScale 1s ease-out forwards; /* Smoother animation name */
+            opacity: 0; /* Initial state for animation */
+            transform: scale(0.95); /* Starts slightly smaller */
+
+            /* Consider removing animation-timeline for wider compatibility if issues arise */
+            /* animation-timeline: view(); */
+            /* animation-range: entry 0% cover 50%; */
+        }
+
+        /* Specific Height Adjustments for sections */
+        /* Using min-height and letting content define height on small screens */
+        .sections { min-height: 400px; }
+        .sections1 { min-height: 300px; }
+        .sections5 { min-height: 450px; }
+
+
+        /* Section Hover Effect */
+        .sections:hover, .sections1:hover, .sections5:hover {
+            transform: translateY(-10px) scale(1.02); /* More pronounced lift and enlarge */
+            box-shadow: 0 12px 25px var(--shadow-deep); /* Much deeper shadow on hover */
+        }
+
+        /* Animation Keyframes for sections (scaling and opacity) */
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px); /* Starts slightly lower and smaller */
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Headings within sections */
+        .sections h1, .sections1 h1, .sections5 h1 {
+            color: white;
+            margin-top: 0;
+            margin-bottom: 20px; /* More space below section headings */
+            font-size: 1.8rem; /* Larger section headings */
+            font-family: 'Montserrat', sans-serif;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Paragraphs within sections */
+        .sections p, .sections1 p, .sections5 p {
+            font-size: 0.95rem; /* Slightly smaller for body text */
+            margin-bottom: 15px; /* Space between paragraphs */
+            text-align: justify; /* Justify for cleaner blocks of text */
+            color: var(--text-light);
+        }
+
+        /* List styles within sections */
+        .sections ul, .sections1 ul, .sections5 ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto; /* Center the list itself */
+            text-align: left; /* Align list items to the left */
+            max-width: 90%; /* Constrain list width for better readability */
+        }
+
+        .sections li, .sections1 li, .sections5 li {
+            margin-bottom: 10px; /* More spacing between list items */
+            font-size: 0.95rem;
+            position: relative;
+            padding-left: 25px; /* Space for custom bullet */
+        }
+
+        .sections li::before, .sections1 li::before, .sections5 li::before {
+            content: '•'; /* Custom bullet point */
+            color: var(--accent-gradient-end); /* Accent color for bullets */
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+            line-height: 1;
+        }
+
+        /* Button Styles */
+        .direct {
+            min-width: 110px; /* Wider button */
+            height: 55px; /* Taller button */
+            cursor: pointer;
+            border: none;
+            border-radius: 30px; /* More rounded pill shape */
+            background: linear-gradient(to right, var(--accent-gradient-start), var(--accent-gradient-end));
+            color: var(--text-dark); /* Darker text for contrast */
+            font-size: 1.15rem; /* Slightly larger text */
+            font-weight: bold;
+            margin-top: 20px; /* More space above the button */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); /* Initial subtle shadow */
+            transition: all 0.3s ease;
+            text-transform: uppercase; /* Make button text uppercase */
+            letter-spacing: 0.5px;
+
+            animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.7);
+            }
+            70% {
+                transform: scale(1.03); /* Smaller pulse */
+                box-shadow: 0 0 0 15px rgba(0, 255, 255, 0); /* Smaller, faster fade out */
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(0, 255, 255, 0);
+            }
+        }
+
+        .direct:hover {
+            opacity: 0.95;
+            transform: translateY(-4px) scale(1.02); /* More pronounced lift on hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35); /* Deeper shadow on hover */
+        }
+
+        /* Link Styles for buttons in projects */
+        .sections5 a {
+            text-decoration: none;
+            display: block;
+            margin: 15px auto; /* Center the link block containing the button */
+        }
+
+        /* Language Logos Section */
+        #skills-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding-top: 20px; /* Space above logos */
+        }
+
+        .logos {
+            min-width: 80px; /* Slightly smaller for a tighter grid */
+            width:25%;
+            min-height: 80px;
+            height:25%;
+            margin: 10px; /* Spacing between logos */
+            transition: transform 0.3s ease, filter 0.3s ease;
+            filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.4)); /* Subtle shadow for logos */
+            animation: logoFloat 2s ease-in-out infinite alternate forwards;
+        }
+
+        .logos:hover {
+            transform: scale(1.1) translateY(-5px); /* Lift and enlarge on hover */
+            filter: drop-shadow(3px 3px 8px rgba(0, 0, 0, 0.6));
+        }
+
+        @keyframes logoFloat {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Profile Icon & LinkedIn */
+        #wholeln-image {
+            position: fixed;
+            top: 20px; /* Adjust as needed */
+            right: 20px; /* Position it top-right */
+            width: 100px; /* Fixed width */
+            height: 100px; /* Fixed height */
+            z-index: 1000; /* Ensure it's on top */
+            display: none; /* Hidden by default on desktop, shown by media query */
+            /* background-color: rgba(255, 0, 0, 0.2); /* For debugging position */
+        }
+
+        #lnbox {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center; /* Center the circle within the box */
+            align-items: center;
+            /* border: 1px solid red; */
+        }
+
+        #circle {
+            width: 84px;
+            height: 84px;
+            background: linear-gradient(#ff0059, black, #00ffff);
+            border: 2px solid var(--text-light); /* More prominent border */
+            border-radius: 50%; /* Perfect circle */
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5); /* Deeper shadow */
+            overflow: hidden; /* Ensure image stays within circle */
+            cursor: pointer;
+            animation: spin-parent 1.5s linear infinite; /*, continuous spin */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes spin-parent {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        #linkedin-go {
+            width: 78px;
+            height: 78px;
+            border-radius: 50%;
+            object-fit: cover; /* Ensures image covers circle without distortion */
+            animation: spin-child-anticlockwise 1.5s linear infinite; /* Counter-spin */
+            display: block; /* Remove extra space below image */
+        }
+
+        @keyframes spin-child-anticlockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+
+        #circle:active {
+            background: radial-gradient(#ff0381, #00db96); /* More vibrant active state */
+        }
+
+        /* Side Navigation Button & Tab */
+        #side-btn {
+            display: none; /* Hidden by default on desktop, shown by media query */
+            width: 50px; /* Fixed size */
+            height: 50px;
+            font-size: 1.8rem;
+            background-color: rgba(0, 0, 0, 0.6); /* Darker, semi-transparent */
+            color: var(--accent-gradient-end); /* Accent color for the arrow */
+            border: 1px solid var(--accent-gradient-end);
+            border-radius: 50%; /* Circular button */
+            position: fixed;
+            top: 25%; /* Adjust position */
+            left: 15px; /* Closer to left edge */
+            z-index: 1001; /* Above other elements */
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #side-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+            transform: scale(1.05);
+        }
+
+        #side-tab {
+            font-family: 'Roboto', sans-serif;
+            background-color: rgba(0, 0, 0, 0.85); /* Darker, more opaque */
+            width: 250px; /* Fixed width for the tab */
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            position: fixed;
+            top: 20%; /* Adjust position */
+            left: -270px; /* Hidden initially, adjust based on width */
+            z-index: 1000;
+            padding: 20px 0;
+            box-sizing: border-box;
+            transition: left 0.3s ease-out; /* Smooth slide transition */
+            display: flex; /* Use flexbox for vertical alignment */
+            flex-direction: column;
+            align-items: flex-start; /* Align text to start */
+        }
+
+        #side-tab.open {
+            left: 15px; /* Slide in */
+        }
+
+        #side-tab a {
+            color: var(--text-light); /* Light text color for links */
+            text-decoration: none;
+            padding: 10px 30px; /* Padding for click area */
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        #side-tab a:hover {
+            background-color: var(--secondary-gradient-start); /* Accent background on hover */
+            color: white;
+        }
+
+        #side-tab h3 {
+            margin: 0;
+            font-weight: normal; /* Less bold for navigation links */
+        }
+
+        #animate {
+            background-color: rgba(255, 100, 50, 0.6);
+            text-align: center;
+            width: auto; /* Allow content to define width */
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 20px auto 0; /* Center button in tab */
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        #animate:active {
+            background-color: rgba(255, 255, 0, 0.6);
+            border-radius: 8px;
+        }
+
+        #animate:hover {
+            animation: animatebtn 1s ease-in-out 1 normal forwards;
+        }
+
+        @keyframes animatebtn {
+            0% { transform: scale(0); opacity: 0; }
+            50% { background-color: red; border-radius: 2px; transform: scale(0.8) rotate(360deg); opacity: 1; }
+            100% { transform: scale(1) translate(0px,0px); opacity: 1; }
+        }
+
+        /* Contact Section Specifics */
+        #contact p {
+            margin-bottom: 8px; /* Tighter spacing for contact details */
+            text-align: center;
+        }
+        #linkedin-url {
+            word-wrap: break-word; /* Ensures long URLs break and wrap */
+            max-width: 90%; /* Limits the width of the URL text itself */
+            margin: 0 auto; /* Center the URL text if max-width is applied */
+            font-size: 0.95rem; /* Consistent font size */
+        }
+
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+                margin-bottom: 30px;
+            }
+            #content {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 25px;
+            }
+            .sections, .sections1, .sections5 {
+                padding: 20px;
+            }
+            .sections h1, .sections1 h1, .sections5 h1 {
+                font-size: 1.6rem;
+            }
+            .direct {
+                min-width: 120px;
+                height: 50px;
+                font-size: 1.1rem;
+            }
+            .logos {
+                width: 70px;
+                height: 70px;
+                margin: 8px;
+            }
+            #wholeln-image {
+                width: 80px;
+                height: 80px;
+                top: 15px;
+                right: 15px;
+            }
+            #circle {
+                width: 70px;
+                height: 70px;
+            }
+            #linkedin-go {
+                width: 65px;
+                height: 65px;
+            }
+            #side-btn {
+                display: block; /* Show side button on smaller screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.4rem;
+                margin-bottom: 25px;
+            }
+            #content {
+                grid-template-columns: 1fr; /* Stack all sections on small screens */
+                padding: 0 10px;
+                gap: 20px;
+            }
+            .sections, .sections1, .sections5 {
+                min-height: auto; /* Let content define height on small screens */
+                padding: 20px;
+            }
+            .direct {
+                width: 90%; /* Wider buttons on small screens */
+                max-width: 250px; /* But not too wide */
+                margin: 15px auto 0; /* Center buttons horizontally */
+            }
+            .sections5 a {
+                margin: 10px auto;
+            }
+            .logos {
+                width: 60px;
+                height: 60px;
+                margin: 5px;
+            }
+            #wholeln-image {
+                display: block; /* Keep LinkedIn icon visible on mobile if desired */
+            }
+            #side-tab {
+                width: 200px; /* Narrower tab for small screens */
+                left: -220px; /* Adjust hide position */
+            }
+            #side-tab.open {
+                left: 10px; /* Adjust show position */
+            }
+            #side-btn {
+                top: 15%; /* Adjust button position slightly */
+                left: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .sections, .sections1, .sections5 {
+                padding: 15px;
+            }
+            .sections h1, .sections1 h1, .sections5 h1 {
+                font-size: 1.4rem;
+            }
+            .logos {
+                width: 50px;
+                height: 50px;
+                margin: 5px;
+            }
+            #wholeln-image {
+                width: 70px;
+                height: 70px;
+                top: 10px;
+                right: 10px;
+            }
+            #circle {
+                width: 60px;
+                height: 60px;
+            }
+            #linkedin-go {
+                width: 55px;
+                height: 55px;
+            }
+            #side-tab {
+                width: 180px;
+                left: -190px;
+            }
+            #side-tab.open {
+                left: 5px;
+            }
+            #side-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+                top: 10%;
+                left: 5px;
+            }
+        }
+
+        /* Specific rule for larger screens to hide mobile elements */
+        @media (min-width: 769px) {
+            #side-btn, #side-tab {
+                display: none !important; /* Hide button and tab on larger screens */
+            }
+            #wholeln-image {
+                display: block; /* Always show LinkedIn icon on larger screens */
+            }
+        }
+
+#scroll-indicator{
+
+height:5px;
+width:100%;
+background-color:#ff0d0d;
+position: fixed;
+left:0px;
+z-index:5;
+transform-origin: 0% 50%;
+animation: scrolling-indicator 1s  linear forwards;
+animation-timeline: scroll(root);
+}
+
+@keyframes scrolling-indicator {
+  from { transform: scaleX(0);}
+  to { transform: scaleX(1); }
+}
+
+#scroll-background{
+position: fixed;
+top:0px;
+left:0px;
+z-index:5;
+display: flex;
+align-items:center;
+background-color:white;
+width:100%;
+height:20px;
+}
+    </style>
+
+</head>
+<body>
+<div id="scroll-background">
+<div id="scroll-indicator"> </div>
+</div>
+
+    <h1>Anandhu A</h1>
+
+    <button id="side-btn"> > </button>
+    <div id="side-tab">
+        <a href="#">
+            <h3>About</h3>
+        </a>
+        <a href="#skills">
+            <h3>Skills</h3>
+        </a>
+        <a href="#education">
+            <h3>Education</h3>
+        </a>
+        <a href="#projects">
+            <h3>Projects</h3>
+        </a>
+        <a href="#contact">
+            <h3>Contact</h3>
+        </a>
+        <button id="animate" onclick="go()">
+            Animate
+        </button>
+    </div>
+
+    <div id="wholeln-image">
+        <div id="lnbox">
+            <div id="circle">
+                <a href="https://www.linkedin.com/in/anandhu27122005" target="_blank" rel="noopener noreferrer">
+                    <img src="content://media/external/downloads/1000020027" alt="Profile Picture" id="linkedin-go"/>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="content">
+        <div class="sections" id="about">
+            <h1>About Me</h1>
+            <p>As a <b>2nd-year B.Tech Electrical and Electronics Engineering student</b> at the College of Engineering Chengannur, I'm eager to explore the diverse fields of electrical engineering, electronics, and programming. I'm particularly interested in <b>web design and networking</b>, and I'm keen to connect with individuals who share similar passions.</p>
+            <p>In addition to my B.Tech studies, I've successfully completed a <b>Diploma in Computer Application (DCA)</b>, an achievement recognized by the Government of Kerala and approved by the BSS Information Technology Mission. My goal is to become a proficient and successful Electrical Engineer.</p>
+        </div>
+
+        <div class="sections1" id="skills">
+            <h1>Skills</h1>
+            <ul>
+                <li>Electrical field</li>
+                <li>Electronics scenario</li>
+                <li>Programming (Python, C)</li>
+                <li>Web Designing (HTML, CSS, JS)</li>
+                <li>Networking</li>
+                <li>Time Management</li>
+                <li>Leadership</li>
+                <li>MS OFFICE & Photoshop</li>
+            </ul>
+        </div>
+
+        <div class="sections1" id="skills-logo">
+            <h1>Language Known (Coding + Web)</h1>
+            <div id="skills-logo-icons">
+                <img src="https://img.icons8.com/color/96/000000/html-5--v1.png" alt="HTML5 logo" class="logos">
+                <img src="https://img.icons8.com/color/96/000000/css3.png" alt="CSS3 logo" class="logos">
+                <img src="https://img.icons8.com/color/96/000000/javascript--v1.png" alt="JS logo" class="logos">
+                <img src="https://img.icons8.com/color/96/000000/python--v1.png" alt="Python logo" class="logos">
+                <img src="https://img.icons8.com/plasticine/100/c-programming.png" alt="C logo" class="logos">
+            </div>
+        </div>
+
+        <div class="sections" id="education">
+            <h1>Education</h1>
+            <ul>
+                <li>2nd Year B-Tech in Electrical and Electronics Engineering - College of Engineering Chengannur</li>
+                <li>Diploma in Computer Application (DCA) - Approved by BSS Information Technology Mission, Recognized by Govt. of Kerala.</li>
+            </ul>
+        </div>
+
+        <div class="sections5" id="projects">
+            <h1>Projects</h1>
+            <p>Offline HTML Compiler: This Offline HTML Compiler is made using the help of AI, in writing almost 80% of code, but the idea is mine.</p>
+            <a href="https://anandhu-chn.github.io/Offline-HTML-Compiler-/" target="_blank" rel="noopener noreferrer">
+                <button class="direct">Offline HTML Compiler</button>
+            </a>
+            <p>Online Calculator: My first HTML + CSS + JS project that I have made.</p>
+            <a href="https://anandhu-chn.github.io/OnlineCalculator/" target="_blank" rel="noopener noreferrer">
+                <button class="direct">Online Calculator</button>
+            </a>
+            <p></p>
+            <a href="https://github.com/Anandhu-CHN" target="_blank" rel="noopener noreferrer">
+                <button class="direct">My GitHub Profile</button>
+            </a>
+        </div>
+
+        <div class="sections" id="contact">
+            <h1>Contact</h1>
+            <p>Feel free to connect!</p>
+            <p>Email: <a href="mailto:your.email@example.com" style="color:var(--accent-gradient-end); text-decoration:none;">your.email@example.com</a></p>
+            <p id="linkedin-url">LinkedIn: <a href="https://www.linkedin.com/in/anandhu-a-406745267/" target="_blank" rel="noopener noreferrer" style="color:var(--accent-gradient-end); text-decoration:none;">https://www.linkedin.com/in/anandhu27122005</a></p>
+            <br>
+            <br>
+        </div>
+    </div>
+
+    <script>
+        const sideBtn = document.getElementById('side-btn');
+        const sideTab = document.getElementById('side-tab');
+        const animateBtn = document.getElementById('animate');
+
+        sideBtn.addEventListener('click', () => {
+            sideTab.classList.toggle('open');
+            sideBtn.textContent = sideTab.classList.contains('open') ? '<' : '>'; // Change arrow direction
+        });
+
+        // Close side tab when a link inside it is clicked
+        sideTab.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                sideTab.classList.remove('open');
+                sideBtn.textContent = '>';
+            });
+        });
+
+        // Placeholder for the 'go' function (if it performs animation on content)
+        function go() {
+            alert('Animate button clicked! Implement your animation logic here.');
+            // Example: Add a class to body or #content to trigger a full-page animation
+            // document.body.classList.add('animate-all');
+        }
+
+        // Intersection Observer for section animations (if animation-timeline is not fully supported or desired)
+        const sections = document.querySelectorAll('.sections, .sections1, .sections5');
+        const observerOptions = {
+            root: null, // viewport
+            rootMargin: '0px',
+            threshold: 0.1 // When 10% of the item is visible
+        };
+
+        const sectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInScale 1s ease-out forwards';
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+    </script>
+
+</body>
+</html>
