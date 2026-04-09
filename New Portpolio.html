@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anandhu A | Interactive Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb; 
+            --primary-hover: #1d4ed8;
+            --bg: #ffffff;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --card-bg: #ffffff;
+        }
+
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        
+        body { 
+            margin: 0; 
+            font-family: 'Inter', sans-serif; 
+            background-color: #fcfcfd; 
+            color: var(--text-dark); 
+            line-height: 1.6; 
+        }
+
+        header { 
+            padding: 20px; 
+            max-width: 1100px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo { font-weight: 700; font-size: 1.4rem; cursor: pointer; }
+        .logo span { color: var(--primary); }
+
+        .hero { 
+            max-width: 1100px; 
+            margin: 60px auto; 
+            padding: 0 20px; 
+            display: flex; 
+            align-items: center; 
+            gap: 40px; 
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .hero h1 { font-size: 3.5rem; margin: 0; line-height: 1.1; letter-spacing: -2px; }
+        
+        /* --- SECURE CANVAS PROFILE --- */
+        .profile-wrap { position: relative; }
+        .profile-container {
+            width: 200px;
+            height: 200px;
+            border-radius: 30px;
+            border: 2px solid var(--border);
+            overflow: hidden;
+            background: #fff;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            cursor: default;
+        }
+
+        .profile-container:hover {
+            transform: scale(1.05) rotate(2deg);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1);
+        }
+
+        #profileCanvas { width: 100%; height: 100%; display: block; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; }
+
+        .project-card { 
+            background: var(--card-bg); 
+            border: 1px solid var(--border); 
+            padding: 30px; 
+            border-radius: 20px; 
+            transition: 0.3s ease;
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .project-card:hover { 
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+        }
+
+        /* --- FEATURED HIGHLIGHTS --- */
+        #featured-content { 
+            display: none; 
+            opacity: 0; 
+            transform: translateY(10px); 
+            transition: 0.5s ease;
+            margin-top: 25px;
+        }
+        #featured-content.active { display: block; opacity: 1; transform: translateY(0); }
+        
+        .highlight-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            margin-bottom: 20px; 
+            padding: 10px;
+            border-bottom: 1px dashed var(--border); 
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.2s;
+        }
+        .highlight-item:hover { background: #f8fafc; border-radius: 8px; }
+        .highlight-img { width: 80px; height: 50px; border-radius: 8px; object-fit: cover; border: 1px solid var(--border); }
+
+        #show-featured-btn { 
+            background: var(--primary); 
+            color: white; padding: 12px 30px; border-radius: 25px; border: none; 
+            cursor: pointer; font-weight: bold; font-size: 0.9rem; transition: 0.3s;
+        }
+
+        /* --- SKILLS --- */
+        .skill-bar-container { margin-bottom: 20px; }
+        .skill-label { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 5px; font-weight: 600; }
+        .skill-bar { height: 8px; background: var(--border); border-radius: 10px; overflow: hidden; }
+        .skill-progress { 
+            height: 100%; 
+            background: var(--primary); 
+            width: 0; 
+            transition: width 1.5s cubic-bezier(0.1, 0, 0.2, 1); 
+        }
+
+        .links { margin-top: 30px; display: flex; gap: 15px; }
+        .btn { padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 600; transition: 0.3s; display: inline-flex; align-items: center; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-secondary { background: white; border: 1px solid var(--border); color: var(--text-dark); }
+
+        @media (max-width: 850px) {
+            .hero { flex-direction: column-reverse; text-align: center; }
+            .container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">ANANDHU<span>.A</span></div>
+        <div style="font-size: 0.8rem; font-weight: 600; color: var(--primary);">EEE // 3RD YEAR</div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Engineering <span style="color: var(--primary);">Quality</span> Hardware.</h1>
+            <p>Electrical & Electronics Engineering student at College of Engineering Chengannur. Focused on analog circuit innovation and modern web integration.</p>
+            <div class="links">
+                <a href="https://www.linkedin.com/in/anandhu-embracing-energy" class="btn btn-primary">View LinkedIn</a>
+                <a href="https://github.com/Anandhu-CHN" class="btn btn-secondary">Project Repository</a>
+            </div>
+        </div>
+
+        <div class="profile-wrap">
+            <div class="profile-container" oncontextmenu="return triggerSecureDownload();">
+                <canvas id="profileCanvas" width="200" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section>
+            <h2 style="font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-light); margin-bottom: 20px;">Professional Highlights</h2>
+            <div class="project-card">
+                <h3 style="margin-top: 0;">Milestones & Achievements</h3>
+                <p>Engagement in prompt engineering, community leadership, and science communication.</p>
+                <button id="show-featured-btn">Show Featured Content</button>
+                
+                <div id="featured-content">
+                    <a href="https://edurupt.com" target="_blank" class="highlight-item">
+                        <img src="Intership.jpg.png" class="highlight-img" alt="Internship">
+                        <div>
+                            <b>Internship:</b> Edurupt 
+                            <div style="font-size: 0.85rem; color: var(--text-light);">AI Prompt Engineering and system testing.</div>
+                        </div>
+                    </a>
+
+                    <a href="https://www.linkedin.com/company/surge-cec/" target="_blank" class="highlight-item">
+                        <img src="volunteer.jpg (1).png" class="highlight-img" alt="Surge">
+                        <div>
+                            <b>Webmaster:</b> Surge CEC 
+                            <div style="font-size: 0.85rem; color: var(--text-light);">Leading digital platforms for the EEE Forum.</div>
+                        </div>
+                    </a>
+
+                    <a href="https://www.linkedin.com/posts/anandhu-embracing-energy_%F0%9D%98%90%F0%9D%98%AF%F0%9D%98%B4%F0%9D%98%B1%F0%9D%98%AA%F0%9D%98%B3%F0%9D%98%A2%F0%9D%98%B5%F0%9D%98%AA%F0%9D%98%B0%F0%9D%98%AF%F0%9D%98%B4-%F0%9D%98%A4%F0%9D%98%A2%F0%9D%98%AF-%F0%9D%98%B5%F0%9D%98%B3%F0%9D%98%A2%F0%9D%98%AF%F0%9D%98%B4%F0%9D%98%A7%F0%9D%98%B0%F0%9D%98%B3%F0%9D%98%AE-activity-7383561034692890624-okoN?utm_source=share&utm_medium=member_android&rcm=ACoAAFLAb8AB5479qPMro61GfRvv1g6NSUl-P_k" target="_blank" class="highlight-item">
+                        <img src="linkedin.png" class="highlight-img" alt="LinkedIn">
+                        <div>
+                            <b>Science Expo:</b> Mini Disha 2025 
+                            <div style="font-size: 0.85rem; color: var(--text-light);">Showcasing engineering curiosity on LinkedIn.</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <h2 style="font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-light); margin-bottom: 20px;">Major Project</h2>
+            <div class="project-card">
+                <h3 style="margin-top: 0;">Multi-Input Audio Back-Amp System</h3>
+                <p>End-to-end hardware development focusing on signal mixing and impedance matching for high-fidelity audio output.</p>
+                <div style="display: flex; gap: 10px;">
+                    <span style="background: #eff6ff; color: var(--primary); padding: 4px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Hardware</span>
+                    <span style="background: #fdf2f8; color: #db2777; padding: 4px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">Analog Design</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 style="font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-light); margin-bottom: 20px;">Technical Inventory</h2>
+            
+            <div class="skill-bar-container">
+                <div class="skill-label"><span>Circuit Analysis</span><span>90%</span></div>
+                <div class="skill-bar"><div class="skill-progress" data-width="90%"></div></div>
+            </div>
+
+            <div class="skill-bar-container">
+                <div class="skill-label"><span>Python Simulation</span><span>60%</span></div>
+                <div class="skill-bar"><div class="skill-progress" data-width="60%"></div></div>
+            </div>
+
+            <div class="skill-bar-container">
+                <div class="skill-label"><span>Web Development</span><span>60%</span></div>
+                <div class="skill-bar"><div class="skill-progress" data-width="60%"></div></div>
+            </div>
+
+            <div style="margin-top: 40px; padding: 25px; background: #f8fafc; border-radius: 20px; border: 1px solid var(--border);">
+                <h4 style="margin-top: 0; font-size: 0.95rem;">Education</h4>
+                <p style="font-size: 0.85rem; margin-bottom: 0;"><strong>B.Tech in EEE</strong><br>College of Engineering Chengannur<br>2024 — 2028</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // 1. SECURE PROFILE CANVAS
+        const canvas = document.getElementById('profileCanvas');
+        const ctx = canvas.getContext('2d');
+        const img = new Image();
+        img.src = 'profile.jpg'; 
+        img.onload = () => ctx.drawImage(img, 0, 0, 200, 200);
+        if (img.complete) ctx.drawImage(img, 0, 0, 200, 200);
+
+        function triggerSecureDownload() {
+            const blurCanvas = document.createElement('canvas');
+            const bCtx = blurCanvas.getContext('2d');
+            blurCanvas.width = 20; blurCanvas.height = 20;
+            bCtx.drawImage(img, 0, 0, 20, 20);
+            const link = document.createElement('a');
+            link.href = blurCanvas.toDataURL('image/jpeg', 0.1);
+            link.download = "anandhu_identity_secure.jpg";
+            link.click();
+            alert("Privacy Shield: Only low-resolution download available.");
+            return false;
+        }
+
+        // 2. FEATURED CONTENT INTERACTION
+        document.getElementById('show-featured-btn').onclick = function() {
+            document.getElementById('featured-content').classList.add('active');
+            this.style.display = 'none';
+        };
+
+        // 3. SKILL BAR ANIMATION
+        document.addEventListener('DOMContentLoaded', () => {
+            const progressBars = document.querySelectorAll('.skill-progress');
+            setTimeout(() => {
+                progressBars.forEach(bar => {
+                    bar.style.width = bar.getAttribute('data-width');
+                });
+            }, 500);
+        });
+
+        window.ondragstart = function() { return false; }
+    </script>
+</body>
+</html>
