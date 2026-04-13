@@ -1,0 +1,146 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vault_OS | Mobile Terminal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+        
+        :root { --bg: #020617; --card: #0f172a; --text: #f8fafc; --accent: #6366f1; }
+        .light-mode { --bg: #f8fafc; --card: #ffffff; --text: #1e293b; --accent: #4f46e5; }
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text); transition: all 0.3s ease; }
+        .glass-card { background-color: var(--card); border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3); }
+        .light-mode .glass-card { border: 1px solid rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body class="p-4 min-h-screen">
+
+    <div class="max-w-4xl mx-auto">
+        <header class="flex justify-between items-center mb-8 pt-4">
+            <h1 class="font-extrabold text-2xl tracking-tighter italic">VAULT_OS</h1>
+            <button onclick="toggleTheme()" class="p-3 rounded-2xl glass-card text-xs font-bold uppercase tracking-widest">
+                🌓 Mode
+            </button>
+        </header>
+
+        <section class="glass-card p-6 rounded-[2rem] mb-8">
+            <p class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest mb-4">Remote_Data_Source</p>
+            <div class="flex flex-col gap-4">
+                <input type="text" id="urlInput" placeholder="Paste Google Sheet CSV URL..." 
+                       class="w-full bg-black/20 border border-white/5 p-4 rounded-xl text-sm outline-none focus:border-indigo-500 transition-all">
+                <button onclick="saveAndInitialize()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-xl text-xs uppercase tracking-widest shadow-lg shadow-indigo-500/20">
+                    Save & Sync
+                </button>
+            </div>
+            <div id="status" class="mt-4 flex items-center gap-2 text-[9px] font-bold text-slate-500 uppercase">
+                <span id="statusDot" class="w-2 h-2 rounded-full bg-slate-700"></span>
+                <span id="statusText">Awaiting Handshake...</span>
+            </div>
+        </section>
+
+        <div id="feed" class="space-y-4 pb-20">
+            </div>
+    </div>
+
+    <script>
+        let isDark = true;
+        let lastCount = 0;
+
+        // 1. PERSISTENCE: Load saved URL on startup
+        window.onload = () => {
+            const savedUrl = localStorage.getItem('vault_sheet_url');
+            if(savedUrl) {
+                document.getElementById('urlInput').value = savedUrl;
+                startSync(savedUrl);
+            }
+        };
+
+        function toggleTheme() {
+            isDark = !isDark;
+            document.body.classList.toggle('light-mode');
+        }
+
+        function saveAndInitialize() {
+            const url = document.getElementById('urlInput').value;
+            if(!url) return;
+            localStorage.setItem('vault_sheet_url', url); // SAVE permanently
+            startSync(url);
+        }
+
+        function startSync(url) {
+            fetchData(url);
+            setInterval(() => fetchData(url), 30000); // Auto-sync 30s
+        }
+
+        async function fetchData(url) {
+            const statusText = document.getElementById('statusText');
+            const statusDot = document.getElementById('statusDot');
+            
+            // Clean URL to force CSV export
+            let csvUrl = url.split('?')[0].replace('/pubhtml', '/pub') + "?output=csv";
+
+            try {
+                // Bypass CORS with AllOrigins Proxy
+                const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(csvUrl + "&t=" + Date.now())}`;
+                const response = await fetch(proxy);
+                const json = await response.json();
+                
+                Papa.parse(json.contents, {
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: (results) => {
+                        renderFeed(results.data);
+                        statusText.innerText = "Connection Stable";
+                        statusDot.className = "w-2 h-2 rounded-full bg-emerald-500 shadow-lg";
+                    }
+                });
+            } catch (err) {
+                statusText.innerText = "Handshake Error";
+                statusDot.className = "w-2 h-2 rounded-full bg-red-500";
+            }
+        }
+
+        function renderFeed(data) {
+            const feed = document.getElementById('feed');
+            if(data.length === lastCount) return;
+            lastCount = data.length;
+
+            feed.innerHTML = data.reverse().map(row => {
+                const keys = Object.keys(row);
+                // Smart search for columns
+                const find = (keysArr) => row[Object.keys(row).find(k => keysArr.some(kw => k.toLowerCase().includes(kw)))] || "N/A";
+                
+                const time = row[keys[0]];
+                const name = find(['name', 'who', 'user']);
+                const email = find(['email', 'mail']);
+                const msg = find(['msg', 'message', 'text']);
+
+                return `
+                    <div class="glass-card p-6 rounded-[2rem] border-l-4 border-indigo-500 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="font-bold text-lg leading-tight uppercase tracking-tighter">${name}</h3>
+                                <p class="text-indigo-500 text-[10px] font-bold tracking-widest uppercase mb-2">${email}</p>
+                            </div>
+                            <span class="text-[8px] font-bold text-slate-500 uppercase">${time}</span>
+                        </div>
+                        <div class="bg-black/20 p-4 rounded-2xl mb-4 italic text-sm text-slate-400">
+                            "${msg}"
+                        </div>
+                        <button onclick="window.location.href='mailto:${email}'" 
+                                class="w-full py-3 bg-white/5 border border-white/5 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-indigo-600 transition-all">
+                            Reply Individually
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+    </script>
+</body>
+</html>
